@@ -7,13 +7,11 @@ namespace UnityStandardAssets._2D
     {
         private CharacterController2D _controller;
         private CharacterController2DDriver _controllerDriver;
-        private Animator _animator;
         
         void Awake()
         {
             _controller = GetComponent<CharacterController2D>();
             _controllerDriver = GetComponent<CharacterController2DDriver>();
-            _animator = GetComponent<Animator>();
 
             // listen to some events for illustration purposes
             //_controller.onControllerCollidedEvent += onControllerCollider;
