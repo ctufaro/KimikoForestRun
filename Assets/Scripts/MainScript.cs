@@ -7,8 +7,6 @@ public class MainScript : MonoBehaviour {
     public Text MyTime;
     public Text BestTime;
     public static bool _resume;
-    public static string _myTime;
-    public static string _bestTime;
     
     void Awake()
     {
@@ -27,8 +25,8 @@ public class MainScript : MonoBehaviour {
         else
         {
             go.SetActive(_resume);
-            MyTime.text = _myTime;
-            BestTime.text = _bestTime;
+            MyTime.text = PlayerPrefs.HasKey("CurrentTime") ? PlayerPrefs.GetString("CurrentTime") : "";
+            BestTime.text = PlayerPrefs.HasKey("BestTime") ? PlayerPrefs.GetString("BestTime") : "";
         }
 	}
 	

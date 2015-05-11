@@ -8,19 +8,17 @@ namespace UnityStandardAssets._2D
     {
         private CharacterController2D _controller;
         private CharacterController2DDriver _controllerDriver;
+        public Text playerTime;
         
         void Awake()
         {
             _controller = GetComponent<CharacterController2D>();
             _controllerDriver = GetComponent<CharacterController2DDriver>();
 
-            // listen to some events for illustration purposes
-            //_controller.onControllerCollidedEvent += onControllerCollider;
             if (_controller)
             {
                 _controller.onTriggerEnterEvent += new Action<Collider2D>(_controller_onTriggerEnterEvent);
             }
-            //_controller.onTriggerExitEvent += onTriggerExitEvent;
         }
 
         void _controller_onTriggerEnterEvent(Collider2D obj)
@@ -38,18 +36,9 @@ namespace UnityStandardAssets._2D
 
         public void Restart()
         {
-            try
-            {
-                GameObject go = GameObject.FindGameObjectWithTag("CurrentTime");
-                MainScript._resume = true;
-                MainScript._myTime = go.GetComponent<Text>().text;
-                MainScript._bestTime = go.GetComponent<Text>().text;
-            }
-            catch(Exception e)
-            {
-                print("error saving time to array:" + e.ToString());
-            }         
-
+            MainScript._resume = true;
+            PlayerPrefs.SetString("CurrentTime", playerTime.text);
+            PlayerPrefs.SetString("BestTime", GetBestTime());
             Application.LoadLevel(0);
 
         }
@@ -57,6 +46,28 @@ namespace UnityStandardAssets._2D
         public void Stop()
         {
             _controllerDriver.forceStop = true;
+        }
+
+        private string GetBestTime()
+        {
+            int currentTime = PlayerPrefs.HasKey("CurrentTime") ? Convert.ToInt32(PlayerPrefs.GetString("CurrentTime")) : 0;
+            int bestTime = PlayerPrefs.HasKey("BestTime") ? Convert.ToInt32(PlayerPrefs.GetString("BestTime")) : 0;
+
+            if (bestTime == 0)
+            {
+                bestTime = currentTime;
+                return bestTime.ToString();
+            }
+            else if (currentTime < bestTime)
+            {
+                return bestTime.ToString();
+            }
+            else
+            {
+                bestTime = currentTime;
+                return bestTime.ToString();
+            }
+
         }
     }
 }
