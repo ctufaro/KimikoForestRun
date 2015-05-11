@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace UnityStandardAssets._2D
 {
@@ -37,7 +38,20 @@ namespace UnityStandardAssets._2D
 
         public void Restart()
         {
+            try
+            {
+                GameObject go = GameObject.FindGameObjectWithTag("CurrentTime");
+                MainScript._resume = true;
+                MainScript._myTime = go.GetComponent<Text>().text;
+                MainScript._bestTime = go.GetComponent<Text>().text;
+            }
+            catch(Exception e)
+            {
+                print("error saving time to array:" + e.ToString());
+            }         
+
             Application.LoadLevel(0);
+
         }
 
         public void Stop()
