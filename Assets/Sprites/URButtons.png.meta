@@ -1,11 +1,12 @@
 fileFormatVersion: 2
 guid: b863dc2c2dffd2c448d8027d713e0adb
-timeCreated: 1431124310
+timeCreated: 1431367471
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: URButtons_0
     21300002: URButtons_1
+    21300004: URButtons_2
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -54,7 +55,7 @@ TextureImporter:
     - name: URButtons_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 57
         y: 0
         width: 280
         height: 283
@@ -64,7 +65,17 @@ TextureImporter:
     - name: URButtons_1
       rect:
         serializedVersion: 2
-        x: 346
+        x: 399
+        y: 0
+        width: 280
+        height: 283
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: URButtons_2
+      rect:
+        serializedVersion: 2
+        x: 745
         y: 4
         width: 280
         height: 283
