@@ -148,4 +148,11 @@ public class CharacterController2DDriver : MonoBehaviour
 
 	}
 
+
+    public void Go()
+    {
+        forceStop = false;
+        GameObject go = GameObject.FindGameObjectWithTag("MessagePanel");
+        go.SetActive(false);
+    }
 }
