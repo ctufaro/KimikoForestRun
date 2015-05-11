@@ -21,7 +21,7 @@ public class CharacterController2DDriver : MonoBehaviour
 	private Animator _animator;
 	private RaycastHit2D _lastControllerColliderHit;
 	private Vector3 _velocity;
-    private SetControlHandler setControl;
+    private SetTouchControlHandler setControl;
 
 	void Awake()
 	{
@@ -147,7 +147,6 @@ public class CharacterController2DDriver : MonoBehaviour
 
 
 	}
-
 
     public void Go()
     {

@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+﻿using UnityEngine.UI;
+using UnityEngine;
 using System.Collections;
 
 public class MainScript : MonoBehaviour {
 
-	// Use this for initialization
+    // Use this for initialization
 	void Start () {
 
 	}
