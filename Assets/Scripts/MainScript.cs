@@ -16,18 +16,23 @@ public class MainScript : MonoBehaviour {
     // Use this for initialization
 	void Start () {
 
-        GameObject go = GameObject.FindGameObjectWithTag("MainTimes");
+        GameObject[] go = GameObject.FindGameObjectsWithTag("Resumed");
+        GameObject start = GameObject.Find("Start");
         
-        if (!_resume)
+        if (_resume)
         {
-            go.SetActive(_resume);
-        }
-        else
-        {
-            go.SetActive(_resume);
             MyTime.text = PlayerPrefs.HasKey("CurrentTime") ? PlayerPrefs.GetString("CurrentTime") : "";
             BestTime.text = PlayerPrefs.HasKey("BestTime") ? PlayerPrefs.GetString("BestTime") : "";
+
         }
+
+        foreach (var g in go)
+        {
+            g.SetActive(_resume);
+        }
+
+        start.SetActive(!_resume);
+
 	}
 	
 	// Update is called once per frame

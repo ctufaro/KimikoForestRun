@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: ce958defeaa29394f835e4823875e2d6
-timeCreated: 1431111228
+timeCreated: 1431464167
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -34,7 +34,7 @@ TextureImporter:
   cubemapConvolutionSteps: 8
   cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
-  textureFormat: -1
+  textureFormat: -3
   maxTextureSize: 2048
   textureSettings:
     filterMode: -1
@@ -60,80 +60,30 @@ TextureImporter:
     - name: buttons_0
       rect:
         serializedVersion: 2
-        x: 16
-        y: 356
-        width: 490
-        height: 218
+        x: 9
+        y: 8
+        width: 280
+        height: 283
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: buttons_1
       rect:
         serializedVersion: 2
-        x: 565
-        y: 356
-        width: 491
-        height: 218
+        x: 305
+        y: 8
+        width: 280
+        height: 283
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: buttons_2
       rect:
         serializedVersion: 2
-        x: 1137
-        y: 356
-        width: 490
-        height: 218
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: buttons_3
-      rect:
-        serializedVersion: 2
-        x: 1697
-        y: 356
-        width: 491
-        height: 218
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: buttons_4
-      rect:
-        serializedVersion: 2
-        x: 516
-        y: 15
-        width: 280
-        height: 284
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: buttons_5
-      rect:
-        serializedVersion: 2
-        x: 808
-        y: 15
-        width: 281
-        height: 284
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: buttons_6
-      rect:
-        serializedVersion: 2
-        x: 1118
-        y: 15
-        width: 281
-        height: 284
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: buttons_7
-      rect:
-        serializedVersion: 2
-        x: 1421
-        y: 15
-        width: 281
-        height: 284
+        x: 598
+        y: 8
+        width: 283
+        height: 283
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
