@@ -1,11 +1,14 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Advertisements;
+
 
 namespace UnityStandardAssets._2D
 {
     public class Triggers: MonoBehaviour
     {
+        private static int deathCount;
         private CharacterController2D _controller;
         private CharacterController2DDriver _controllerDriver;
         public Text playerTime;
@@ -19,6 +22,9 @@ namespace UnityStandardAssets._2D
             {
                 _controller.onTriggerEnterEvent += new Action<Collider2D>(_controller_onTriggerEnterEvent);
             }
+
+            //ads stuff
+            Advertisement.Initialize("38662", false);
         }
 
         void _controller_onTriggerEnterEvent(Collider2D obj)
@@ -29,17 +35,38 @@ namespace UnityStandardAssets._2D
                     Stop();
                     break;
                 case ("Killzone"):
-                    Restart();
+                    Killed();
                     break;
             }
         }
 
-        public void Restart()
+        public void Killed()
         {
+            deathCount++;
+            
             MainScript._resume = true;
             PlayerPrefs.SetString("CurrentTime", playerTime.text);
             PlayerPrefs.SetString("BestTime", GetBestTime());
-            Application.LoadLevel(0);
+            //Application.LoadLevel(0);
+
+            if (deathCount % 3 == 0)
+            {
+                if (Advertisement.isReady())
+                {
+                    Advertisement.Show(null, new ShowOptions
+                    {
+                        pause = true,
+                        resultCallback = result =>
+                        {
+                            Application.LoadLevel(0);
+                        }
+                    });
+                }
+            }
+            else
+            {
+                Application.LoadLevel(0);
+            }
 
         }
 
