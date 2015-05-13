@@ -49,4 +49,13 @@ public class MainScript : MonoBehaviour {
     {
         Application.LoadLevel(1);
     }
+
+    public void Restart()
+    {
+        #if UNITY_ANDROID 
+            Application.OpenURL("market://details?id=YOUR_ID");
+        #elif UNITY_IOS
+            Application.OpenURL("itms-apps://itunes.apple.com/app/id");
+        #endif
+    }
 }
