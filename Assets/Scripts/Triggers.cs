@@ -42,12 +42,11 @@ namespace UnityStandardAssets._2D
 
         public void Killed()
         {
-            deathCount++;
-            
+          
             MainScript._resume = true;
             PlayerPrefs.SetString("CurrentTime", playerTime.text);
             PlayerPrefs.SetString("BestTime", GetBestTime());
-            //Application.LoadLevel(0);
+            deathCount++;
 
             if (deathCount % 3 == 0)
             {
