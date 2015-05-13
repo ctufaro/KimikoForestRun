@@ -61,6 +61,10 @@ namespace UnityStandardAssets._2D
                         }
                     });
                 }
+                else
+                {
+                    Application.LoadLevel(0);
+                }
             }
             else
             {
