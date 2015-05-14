@@ -12,6 +12,7 @@ namespace UnityStandardAssets._2D
         private CharacterController2D _controller;
         private CharacterController2DDriver _controllerDriver;
         public Text playerTime;
+        public string UnityGameId;
         
         void Awake()
         {
@@ -24,7 +25,7 @@ namespace UnityStandardAssets._2D
             }
 
             //ads stuff
-            Advertisement.Initialize("38662", false);
+            Advertisement.Initialize(UnityGameId, false);
         }
 
         void _controller_onTriggerEnterEvent(Collider2D obj)
@@ -50,21 +51,7 @@ namespace UnityStandardAssets._2D
 
             if (deathCount % 3 == 0)
             {
-                if (Advertisement.isReady())
-                {
-                    Advertisement.Show(null, new ShowOptions
-                    {
-                        pause = true,
-                        resultCallback = result =>
-                        {
-                            Application.LoadLevel(0);
-                        }
-                    });
-                }
-                else
-                {
-                    Application.LoadLevel(0);
-                }
+                UnityInterstitialAd();
             }
             else
             {
@@ -99,5 +86,25 @@ namespace UnityStandardAssets._2D
             }
 
         }
+
+        public void UnityInterstitialAd()
+        {
+            if (Advertisement.isReady())
+            {
+                Advertisement.Show(null, new ShowOptions
+                {
+                    pause = true,
+                    resultCallback = result =>
+                    {
+                        Application.LoadLevel(0);
+                    }
+                });
+            }
+            else
+            {
+                Application.LoadLevel(0);
+            }
+        }
+
     }
 }
