@@ -37,7 +37,7 @@ namespace UnityStandardAssets._2D
             AdPanel.SetActive(false);
             if (deathCount > 0)
             {
-                GameObject.Find("PowerUp").transform.position = new Vector3(-52.28f, 10.27f, 0);
+                GameObject.Find("PowerUp").transform.position = new Vector3(-54f, 10.27f, 0);
             }
 
             #endregion
