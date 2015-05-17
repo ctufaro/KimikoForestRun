@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Advertisements;
@@ -9,6 +10,7 @@ namespace UnityStandardAssets._2D
     public class Triggers: MonoBehaviour
     {
         private static int deathCount;
+        private GameObject AdPanel;
         private CharacterController2D _controller;
         private CharacterController2DDriver _controllerDriver;
         public Text playerTime;
@@ -24,12 +26,27 @@ namespace UnityStandardAssets._2D
                 _controller.onTriggerEnterEvent += new Action<Collider2D>(_controller_onTriggerEnterEvent);
             }
 
-            //ads stuff
-            Advertisement.Initialize(UnityGameId, false);
+            #region Ads stuff
+            if (Advertisement.isSupported)
+            {
+                Advertisement.allowPrecache = true;
+                Advertisement.Initialize(UnityGameId, false);
+            }
+
+            AdPanel = GameObject.Find("AdPanel");
+            AdPanel.SetActive(false);
+            if (deathCount > 0)
+            {
+                GameObject.Find("PowerUp").transform.position = new Vector3(-52.28f, 10.27f, 0);
+            }
+
+            #endregion
         }
+
 
         void _controller_onTriggerEnterEvent(Collider2D obj)
         {
+          
             switch (obj.gameObject.name)
             {
                 case ("RoundOverZone"):
@@ -37,6 +54,9 @@ namespace UnityStandardAssets._2D
                     break;
                 case ("Killzone"):
                     Killed();
+                    break;
+                case ("PowerUp"):
+                    PowerUp(obj.gameObject);
                     break;
             }
         }
@@ -62,7 +82,25 @@ namespace UnityStandardAssets._2D
 
         public void Stop()
         {
-            _controllerDriver.forceStop = true;
+            _controllerDriver.forceStop = true;            
+        }
+
+        public void PowerUp(GameObject go)
+        {
+            Destroy(go);
+            StartCoroutine(PowerUp());
+
+            AdPanel.SetActive(true);
+        }
+
+        private IEnumerator PowerUp()
+        {
+            while (!_controller.isGrounded)
+            {
+                yield return null;
+            }
+
+            Stop();
         }
 
         private string GetBestTime()
@@ -91,19 +129,27 @@ namespace UnityStandardAssets._2D
         {
             if (Advertisement.isReady())
             {
-                Advertisement.Show(null, new ShowOptions
-                {
-                    pause = true,
-                    resultCallback = result =>
-                    {
-                        Application.LoadLevel(0);
-                    }
-                });
+                //Advertisement.Show(null, new ShowOptions
+                //{
+                //    pause = true,
+                //    resultCallback = result =>
+                //    {
+                //        Application.LoadLevel(0);
+                //    }
+                //});
+                ShowOptions options = new ShowOptions { pause = true, resultCallback = HandleShowResult };
+                Advertisement.Show(null, options);
             }
             else
             {
                 Application.LoadLevel(0);
             }
+        }
+
+        private void HandleShowResult(ShowResult result)
+        {
+            print("Unity Ad Result: " + result); 
+            Application.LoadLevel(0);
         }
 
     }

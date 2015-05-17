@@ -22,6 +22,7 @@ public class CharacterController2DDriver : MonoBehaviour
 	private RaycastHit2D _lastControllerColliderHit;
 	private Vector3 _velocity;
     private SetTouchControlHandler setControl;
+    private bool boost;
 
 	void Awake()
 	{
@@ -124,8 +125,7 @@ public class CharacterController2DDriver : MonoBehaviour
 		//if( _controller.isGrounded && Input.GetKeyDown( KeyCode.Space ) )
 		if( _controller.isGrounded && setControl())
         {
-			_velocity.y = Mathf.Sqrt( 2f * jumpHeight * -gravity );
-			_animator.Play( Animator.StringToHash( "Jump" ) );
+            Jump();
 		}
 
 
@@ -154,4 +154,33 @@ public class CharacterController2DDriver : MonoBehaviour
         GameObject go = GameObject.FindGameObjectWithTag("MessagePanel");
         go.SetActive(false);
     }
+
+    public void GoAd()
+    {
+        forceStop = false;
+        GameObject go = GameObject.Find("AdPanel");
+        go.SetActive(false);
+        boost = true;
+        
+    }
+
+    public void Jump()
+    {
+        if (boost)
+        {
+            jumpHeight = 2.3f;
+            _velocity.x = 25f;
+            boost = false;
+        }
+        else
+        {
+            jumpHeight = 1.9f;
+        }
+        
+        _velocity.y = Mathf.Sqrt(2f * jumpHeight * -gravity);
+        _animator.Play(Animator.StringToHash("Jump"));
+
+        
+    }
+
 }
