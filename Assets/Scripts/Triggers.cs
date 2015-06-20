@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Net;   
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Advertisements;
@@ -11,9 +12,13 @@ namespace UnityStandardAssets._2D
     {
         private static int deathCount;
         private GameObject AdPanel;
+        private GameObject AdPanel2;
         private CharacterController2D _controller;
         private CharacterController2DDriver _controllerDriver;
         public Text playerTime;
+        public Text bigText;
+        public Text companyLogo;
+        public Text littleText;
         public string UnityGameId;
         
         void Awake()
@@ -33,11 +38,15 @@ namespace UnityStandardAssets._2D
                 Advertisement.Initialize(UnityGameId, false);
             }
 
-            AdPanel = GameObject.Find("AdPanel");
+            AdPanel = GameObject.Find("AdPanel1");
             AdPanel.SetActive(false);
+
+            AdPanel2 = GameObject.Find("AdPanel2");
+            AdPanel2.SetActive(false);
+
             if (deathCount > 0)
             {
-                GameObject.Find("PowerUp").transform.position = new Vector3(-54f, 10.27f, 0);
+                GameObject.Find("PowerUp1").transform.position = new Vector3(-54f, 10.27f, 0);
             }
 
             #endregion
@@ -55,8 +64,11 @@ namespace UnityStandardAssets._2D
                 case ("Killzone"):
                     Killed();
                     break;
-                case ("PowerUp"):
-                    PowerUp(obj.gameObject);
+                case ("PowerUp1"):
+                    PowerUp(obj.gameObject, true);
+                    break;
+                case ("PowerUp2"):
+                    PowerUp(obj.gameObject, false);
                     break;
             }
         }
@@ -85,12 +97,44 @@ namespace UnityStandardAssets._2D
             _controllerDriver.forceStop = true;            
         }
 
-        public void PowerUp(GameObject go)
+        private void RESTPanel()
         {
-            Destroy(go);
-            StartCoroutine(PowerUp());
+            using (var client = new WebClient())
+            {
+                client.Proxy = WebRequest.DefaultWebProxy;
 
-            AdPanel.SetActive(true);
+                var jsonResponse = client.DownloadString("http://radsurge.azurewebsites.net/rest/coupons").Replace("}", "").Replace("\"", ""); ;
+                var ss = jsonResponse.Split(new char[] { ',' });
+
+                string big_message = ss[0].Split(new char[] { ':' })[1];
+                string little_message = ss[1].Split(new char[] { ':' })[1];
+                string company_logo = ss[2].Split(new char[] { ':' })[1];
+
+                //Do something here 
+                bigText.text = big_message;
+                companyLogo.text = company_logo;
+                littleText.text = little_message;
+            }
+
+        }
+
+        public void PowerUp(GameObject go, bool fix)
+        {
+            //Fixed panel
+            if (fix)
+            {
+                Destroy(go);
+                StartCoroutine(PowerUp());
+                AdPanel.SetActive(true);
+            }
+            //REST panel
+            else
+            {
+                Destroy(go);
+                StartCoroutine(PowerUp());
+                AdPanel2.SetActive(true);
+                RESTPanel();
+            }
         }
 
         private IEnumerator PowerUp()

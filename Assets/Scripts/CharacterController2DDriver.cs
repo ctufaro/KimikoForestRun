@@ -158,10 +158,17 @@ public class CharacterController2DDriver : MonoBehaviour
     public void GoAd()
     {
         forceStop = false;
-        GameObject go = GameObject.Find("AdPanel");
+        GameObject go = GameObject.Find("AdPanel1");
+        go.SetActive(false);
+        boost = true;        
+    }
+
+    public void GoAd2()
+    {
+        forceStop = false;
+        GameObject go = GameObject.Find("AdPanel2");
         go.SetActive(false);
         boost = true;
-        
     }
 
     public void Jump()
