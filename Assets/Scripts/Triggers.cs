@@ -16,11 +16,17 @@ namespace UnityStandardAssets._2D
         private CharacterController2D _controller;
         private CharacterController2DDriver _controllerDriver;
         public Text playerTime;
+        public string UnityGameId;
+
+        #region Radsurge Variable
         public Text bigText;
         public Text companyLogo;
         public Text littleText;
-        public string UnityGameId;
-        
+        private string _big_message = "";
+        private string _company_logo = "";
+        private string _little_message = "";
+        #endregion
+
         void Awake()
         {
             _controller = GetComponent<CharacterController2D>();
@@ -32,6 +38,8 @@ namespace UnityStandardAssets._2D
             }
 
             #region Ads stuff
+            StartCoroutine(MakeREST());
+
             if (Advertisement.isSupported)
             {
                 Advertisement.allowPrecache = true;
@@ -47,7 +55,7 @@ namespace UnityStandardAssets._2D
             if (deathCount > 0)
             {
                 GameObject.Find("PowerUp1").transform.position = new Vector3(-54f, 10.27f, 0);
-            }
+            }            
 
             #endregion
         }
@@ -99,6 +107,14 @@ namespace UnityStandardAssets._2D
 
         private void RESTPanel()
         {
+            //Do something here 
+            bigText.text = _big_message;
+            companyLogo.text = _company_logo;
+            littleText.text = _little_message;
+        }
+
+        private IEnumerator MakeREST()
+        {
             using (var client = new WebClient())
             {
                 client.Proxy = WebRequest.DefaultWebProxy;
@@ -111,11 +127,14 @@ namespace UnityStandardAssets._2D
                 string company_logo = ss[2].Split(new char[] { ':' })[1];
 
                 //Do something here 
-                bigText.text = big_message;
-                companyLogo.text = company_logo;
-                littleText.text = little_message;
+                _big_message = big_message;
+                _company_logo = company_logo;
+                _little_message = little_message;
+
+                print("REST Call");
             }
 
+            yield return null;
         }
 
         public void PowerUp(GameObject go, bool fix)
