@@ -37,8 +37,9 @@ namespace UnityStandardAssets._2D
                 _controller.onTriggerEnterEvent += new Action<Collider2D>(_controller_onTriggerEnterEvent);
             }
 
-            #region Ads stuff
-            StartCoroutine(MakeREST());
+            #region Ads stuff (Note what I commented out)
+            
+            //StartCoroutine(MakeREST());
 
             if (Advertisement.isSupported)
             {
@@ -49,13 +50,15 @@ namespace UnityStandardAssets._2D
             AdPanel = GameObject.Find("AdPanel1");
             AdPanel.SetActive(false);
 
-            AdPanel2 = GameObject.Find("AdPanel2");
-            AdPanel2.SetActive(false);
+            //AdPanel2 = GameObject.Find("AdPanel2");
+            //AdPanel2.SetActive(false);
 
-            if (deathCount > 0)
-            {
-                GameObject.Find("PowerUp1").transform.position = new Vector3(-54f, 10.27f, 0);
-            }            
+            //if (deathCount > 0)
+            //{
+            //    GameObject.Find("PowerUp1").transform.position = new Vector3(-54f, 10.27f, 0);
+            //}            
+
+            GameObject.Find("PowerUp1").transform.position = new Vector3(-54f, 10.27f, 0);
 
             #endregion
         }
@@ -76,7 +79,7 @@ namespace UnityStandardAssets._2D
                     PowerUp(obj.gameObject, true);
                     break;
                 case ("PowerUp2"):
-                    PowerUp(obj.gameObject, false);
+                    //PowerUp(obj.gameObject, false);
                     break;
             }
         }
