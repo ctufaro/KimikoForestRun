@@ -18,15 +18,6 @@ namespace UnityStandardAssets._2D
         public Text playerTime;
         public string UnityGameId;
 
-        #region Radsurge Variable
-        public Text bigText;
-        public Text companyLogo;
-        public Text littleText;
-        private string _big_message = "";
-        private string _company_logo = "";
-        private string _little_message = "";
-        #endregion
-
         void Awake()
         {
             _controller = GetComponent<CharacterController2D>();
@@ -47,9 +38,6 @@ namespace UnityStandardAssets._2D
                 Advertisement.Initialize(UnityGameId, false);
             }
 
-            AdPanel = GameObject.Find("AdPanel1");
-            AdPanel.SetActive(false);
-
             //AdPanel2 = GameObject.Find("AdPanel2");
             //AdPanel2.SetActive(false);
 
@@ -58,7 +46,7 @@ namespace UnityStandardAssets._2D
             //    GameObject.Find("PowerUp1").transform.position = new Vector3(-54f, 10.27f, 0);
             //}            
 
-            GameObject.Find("PowerUp1").transform.position = new Vector3(-54f, 10.27f, 0);
+            //GameObject.Find("PowerUp1").transform.position = new Vector3(-54f, 10.27f, 0);
 
             #endregion
         }
@@ -75,12 +63,12 @@ namespace UnityStandardAssets._2D
                 case ("Killzone"):
                     Killed();
                     break;
-                case ("PowerUp1"):
-                    PowerUp(obj.gameObject, true);
-                    break;
-                case ("PowerUp2"):
-                    //PowerUp(obj.gameObject, false);
-                    break;
+                //case ("PowerUp1"):
+                //    PowerUp(obj.gameObject, true);
+                //    break;
+                //case ("PowerUp2"):
+                //    PowerUp(obj.gameObject, false);
+                //    break;
             }
         }
 
@@ -108,38 +96,6 @@ namespace UnityStandardAssets._2D
             _controllerDriver.forceStop = true;            
         }
 
-        private void RESTPanel()
-        {
-            //Do something here 
-            bigText.text = _big_message;
-            companyLogo.text = _company_logo;
-            littleText.text = _little_message;
-        }
-
-        private IEnumerator MakeREST()
-        {
-            using (var client = new WebClient())
-            {
-                client.Proxy = WebRequest.DefaultWebProxy;
-
-                var jsonResponse = client.DownloadString("http://radsurge.azurewebsites.net/rest/coupons").Replace("}", "").Replace("\"", ""); ;
-                var ss = jsonResponse.Split(new char[] { ',' });
-
-                string big_message = ss[0].Split(new char[] { ':' })[1];
-                string little_message = ss[1].Split(new char[] { ':' })[1];
-                string company_logo = ss[2].Split(new char[] { ':' })[1];
-
-                //Do something here 
-                _big_message = big_message;
-                _company_logo = company_logo;
-                _little_message = little_message;
-
-                print("REST Call");
-            }
-
-            yield return null;
-        }
-
         public void PowerUp(GameObject go, bool fix)
         {
             //Fixed panel
@@ -155,7 +111,6 @@ namespace UnityStandardAssets._2D
                 Destroy(go);
                 StartCoroutine(PowerUp());
                 AdPanel2.SetActive(true);
-                RESTPanel();
             }
         }
 
