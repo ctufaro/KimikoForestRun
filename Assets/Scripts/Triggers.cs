@@ -11,8 +11,9 @@ namespace UnityStandardAssets._2D
     public class Triggers: MonoBehaviour
     {
         private static int deathCount;
-        private GameObject AdPanel;
-        private GameObject AdPanel2;
+        //private GameObject AdPanel;
+        //private GameObject AdPanel2;
+        private GameObject FinalMessage;
         private CharacterController2D _controller;
         private CharacterController2DDriver _controllerDriver;
         public Text playerTime;
@@ -22,6 +23,7 @@ namespace UnityStandardAssets._2D
         {
             _controller = GetComponent<CharacterController2D>();
             _controllerDriver = GetComponent<CharacterController2DDriver>();
+            
 
             if (_controller)
             {
@@ -37,6 +39,9 @@ namespace UnityStandardAssets._2D
                 Advertisement.allowPrecache = true;
                 Advertisement.Initialize(UnityGameId, false);
             }
+
+            FinalMessage = GameObject.Find("FinalMessage");
+            FinalMessage.SetActive(false);
 
             //AdPanel2 = GameObject.Find("AdPanel2");
             //AdPanel2.SetActive(false);
@@ -59,9 +64,13 @@ namespace UnityStandardAssets._2D
             {
                 case ("RoundOverZone"):
                     Stop();
+                    FinalMessage.SetActive(true);
                     break;
                 case ("Killzone"):
                     Killed();
+                    break;
+                case ("CheckPoint"):
+                    LevelManager.CheckPoint();
                     break;
                 //case ("PowerUp1"):
                 //    PowerUp(obj.gameObject, true);
@@ -103,14 +112,14 @@ namespace UnityStandardAssets._2D
             {
                 Destroy(go);
                 StartCoroutine(PowerUp());
-                AdPanel.SetActive(true);
+                //AdPanel.SetActive(true);
             }
             //REST panel
             else
             {
                 Destroy(go);
                 StartCoroutine(PowerUp());
-                AdPanel2.SetActive(true);
+                //AdPanel2.SetActive(true);
             }
         }
 
