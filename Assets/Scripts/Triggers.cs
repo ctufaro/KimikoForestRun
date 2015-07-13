@@ -56,7 +56,6 @@ namespace UnityStandardAssets._2D
             #endregion
         }
 
-
         void _controller_onTriggerEnterEvent(Collider2D obj)
         {
           

@@ -54,6 +54,11 @@ public class LevelManager : MonoBehaviour {
         GameObject go = GameObject.FindGameObjectWithTag("Player");
         position = go.transform.position;
     }
+
+    public void Restart()
+    {
+        Application.LoadLevel(0);
+    }
 	
 	void Update () {
         if (kimiko)

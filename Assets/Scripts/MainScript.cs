@@ -50,7 +50,7 @@ public class MainScript : MonoBehaviour {
         Application.LoadLevel(1);
     }
 
-    public void Restart()
+    public void RateUs()
     {
         #if UNITY_ANDROID 
             Application.OpenURL("market://details?id=YOUR_ID");
