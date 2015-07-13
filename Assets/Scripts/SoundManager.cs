@@ -4,6 +4,7 @@ using System.Collections;
 public class SoundManager : MonoBehaviour {
 
     private static SoundManager instance = null;
+    private static AudioSource music;
 
     public static SoundManager Instance
     {
@@ -20,13 +21,14 @@ public class SoundManager : MonoBehaviour {
         else
         {
             instance = this;
+            music = this.GetComponent<AudioSource>();
         }
         DontDestroyOnLoad(this.gameObject);
     }
 
     public static void ToggleAudio(bool on)
     {
-        print("Audio:" + on);
+        music.mute = on;
     }
 
 	// Use this for initialization

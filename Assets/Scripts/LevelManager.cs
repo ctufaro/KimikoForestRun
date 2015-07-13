@@ -39,7 +39,7 @@ public class LevelManager : MonoBehaviour {
         if (AudioButton)
         {
             AudioButton.image.overrideSprite = (AudioOn) ? AudioOnImage : AudioOffImage;
-            SoundManager.ToggleAudio(AudioOn);
+            SoundManager.ToggleAudio(!AudioOn);
         }
        
     }

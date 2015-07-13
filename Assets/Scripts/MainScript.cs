@@ -53,7 +53,7 @@ public class MainScript : MonoBehaviour {
     public void RateUs()
     {
         #if UNITY_ANDROID 
-            Application.OpenURL("market://details?id=YOUR_ID");
+        Application.OpenURL("market://details?id=com.KimikoKidForestRun");
         #elif UNITY_IOS
             Application.OpenURL("itms-apps://itunes.apple.com/app/id");
         #endif

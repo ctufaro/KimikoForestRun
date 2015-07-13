@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 using System.Collections;
 
 
@@ -123,7 +124,7 @@ public class CharacterController2DDriver : MonoBehaviour
 
 		// we can only jump whilst grounded
 		//if( _controller.isGrounded && Input.GetKeyDown( KeyCode.Space ) )
-		if( _controller.isGrounded && setControl())
+		if( _controller.isGrounded && setControl() && !EventSystem.current.IsPointerOverGameObject())
         {
             Jump();
 		}
