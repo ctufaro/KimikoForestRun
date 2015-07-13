@@ -39,16 +39,11 @@ public class LevelManager : MonoBehaviour {
         if (AudioButton)
         {
             AudioButton.image.overrideSprite = (AudioOn) ? AudioOnImage : AudioOffImage;
-            PlayMusic(AudioOn);
+            SoundManager.ToggleAudio(AudioOn);
         }
        
     }
-
-    public void PlayMusic(bool on)
-    {
-
-    }
-    
+ 
     public static void CheckPoint()
     {
         GameObject go = GameObject.FindGameObjectWithTag("Player");
