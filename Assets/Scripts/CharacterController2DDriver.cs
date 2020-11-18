@@ -41,7 +41,8 @@ public class CharacterController2DDriver : MonoBehaviour
         #elif UNITY_WEBPLAYER
             setControl = () => { Input.GetKeyDown( KeyCode.Space );};
         #else
-            setControl = () => { return (Input.touchCount > 0) && (Input.GetTouch(0).phase == TouchPhase.Began);};
+            setControl = () => { return Input.GetKeyDown( KeyCode.Space );};
+			//setControl = () => { return (Input.touchCount > 0) && (Input.GetTouch(0).phase == TouchPhase.Began);};
         #endif
     }
 
